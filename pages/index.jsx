@@ -19,7 +19,7 @@ export default function Home() {
   ]);
   useEffect(() => {
     setRandomQuiz(
-      randomArray(6, 10).map((index) => ({
+      randomArray(10, 29).map((index) => ({
         ...quiz[index],
         revealed: false,
       }))
