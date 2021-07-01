@@ -54,7 +54,7 @@ export default function Home() {
         ></link>
       </Head>
       <header className="max-w-3xl mx-auto mt-9">
-        <h1 className="text-5xl text-center">Civic test</h1>
+        <h1 className="text-5xl text-center">Civic test 2021 (California)</h1>
       </header>
       <main className="max-w-3xl px-5 mx-auto">
         <ul>
