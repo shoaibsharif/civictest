@@ -12,6 +12,7 @@ module.exports = {
     extend: {
       colors: {
         gray: colors.blueGray,
+        amber: colors.amber,
       },
       fontFamily: {
         belleza: ["Belleza", defaultTheme.fontFamily.sans],
