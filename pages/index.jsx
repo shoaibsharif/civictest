@@ -107,7 +107,7 @@ export default function Home() {
         <h1 className="text-5xl text-center">Civic test 2021 (California)</h1>
       </header>
       <main className="max-w-3xl px-5 mx-auto my-10">
-        <div className="w-72 ml-auto">
+        <div className="ml-auto w-72">
           <Listbox value={selected} onChange={changeQuestion}>
             <div className="relative mt-1">
               <Listbox.Button className="relative w-full py-2 pl-3 pr-10 text-left bg-gray-600 rounded-lg shadow-md cursor-default focus:outline-none focus-visible:ring-2 focus-visible:ring-opacity-75 focus-visible:ring-white focus-visible:ring-offset-orange-300 focus-visible:ring-offset-2 focus-visible:border-indigo-500 sm:text-sm">
@@ -148,19 +148,16 @@ export default function Home() {
                           >
                             {person.name}
                           </span>
-                          {selected ? (
+                          {selected && (
                             <span
-                              className={`${
-                                active ? "text-amber-600" : "text-amber-600"
-                              }
-                                absolute inset-y-0 left-0 flex items-center pl-3`}
+                              className={`absolute inset-y-0 left-0 flex items-center pl-3 text-amber-600`}
                             >
                               <CheckIcon
                                 className="w-5 h-5"
                                 aria-hidden="true"
                               />
                             </span>
-                          ) : null}
+                          )}
                         </>
                       )}
                     </Listbox.Option>
@@ -201,9 +198,15 @@ export default function Home() {
           ))}
         </ul>
       </main>
-      <footer className="my-10">
+      <footer className="max-w-3xl px-5 mx-auto my-10 text-center">
         The questions are Civic 2008 question test. Website has been built by
-        Shoaib Sharif
+        &nbsp;
+        <a
+          href="https://shoaibsharif.dev"
+          className="text-yellow-700 hover:underline"
+        >
+          Shoaib Sharif
+        </a>
       </footer>
     </>
   );
