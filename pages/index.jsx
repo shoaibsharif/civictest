@@ -106,7 +106,7 @@ export default function Home() {
       <header className="max-w-3xl mx-auto mt-9">
         <h1 className="text-5xl text-center">Civic test 2021 (California)</h1>
       </header>
-      <main className="max-w-3xl px-5 mx-auto mt-10">
+      <main className="max-w-3xl px-5 mx-auto my-10">
         <div className="w-72 ml-auto">
           <Listbox value={selected} onChange={changeQuestion}>
             <div className="relative mt-1">
@@ -201,6 +201,10 @@ export default function Home() {
           ))}
         </ul>
       </main>
+      <footer className="my-10">
+        The questions are Civic 2008 question test. Website has been built by
+        Shoaib Sharif
+      </footer>
     </>
   );
 }
