@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { Fragment, useEffect, useState } from "react";
+import { Fragment, useEffect, useMemo, useState } from "react";
 import { quiz } from "../lib/civic";
 import produce from "immer";
 import { Listbox, Transition } from "@headlessui/react";
@@ -14,7 +14,7 @@ export default function Home() {
   const randomInt = (max) => Math.floor(Math.random() * max);
 
   /**
-   * Get a random array with unique value
+   * Get a random array with unique values
    * @param {number} length array length
    * @param {number} max between 0 and max number
    * @returns {number[]} an array
@@ -30,15 +30,18 @@ export default function Home() {
   const [randomQuiz, setRandomQuiz] = useState([
     { question: "", answer: [], revealed: false },
   ]);
-  const people = [
-    { name: "Random 10" },
-    { name: "Show All" },
-    { name: "1-25" },
-    { name: "26-50" },
-    { name: "51-75" },
-    { name: "76-100" },
-  ];
-  const [selected, setSelected] = useState(people[0]);
+  const selections = useMemo(
+    () => [
+      { name: "Random 10" },
+      { name: "Show All" },
+      { name: "1-25" },
+      { name: "26-50" },
+      { name: "51-75" },
+      { name: "76-100" },
+    ],
+    []
+  );
+  const [selected, setSelected] = useState(selections[0]);
   useEffect(() => {
     setRandomQuiz(
       randomArray(10, quiz.length).map((index) => ({
@@ -47,12 +50,16 @@ export default function Home() {
       }))
     );
   }, []);
+
+  // show specific question's answer
   const changeRevelState = (index) =>
     setRandomQuiz(
       produce(randomQuiz, (draftState) => {
         draftState[index].revealed = true;
       })
     );
+
+  // Change display questions patter
   const changeQuestion = (value) => {
     setSelected(value);
     if (value.name === "Show All") {
@@ -126,7 +133,7 @@ export default function Home() {
                 leaveTo="opacity-0"
               >
                 <Listbox.Options className="absolute w-full py-1 mt-1 overflow-auto text-base bg-gray-800 rounded-md shadow-lg ring-1 ring-indigo-600 ring-opacity-5 focus:outline-none sm:text-sm">
-                  {people.map((person, personIdx) => (
+                  {selections.map((person, personIdx) => (
                     <Listbox.Option
                       key={personIdx}
                       className={({ active }) =>
