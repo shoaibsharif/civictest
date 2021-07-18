@@ -2,8 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer utilities {
+  @variants hover {
+    .shadow-underline {
+      box-shadow: 0px 2px 0px theme("colors.yellow.700");
+    }
+  }
+}
+
 body {
-  @apply bg-gray-900 text-white;
+  @apply text-white bg-gray-900;
 }
 h1,
 h2,

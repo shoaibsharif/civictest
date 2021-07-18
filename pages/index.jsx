@@ -128,6 +128,7 @@ export default function Home() {
               </Listbox.Button>
               <Transition
                 as={Fragment}
+                enter="transition ease-in-out duration-200"
                 leave="transition ease-in duration-100"
                 leaveFrom="opacity-100"
                 leaveTo="opacity-0"
@@ -206,14 +207,25 @@ export default function Home() {
         </ul>
       </main>
       <footer className="max-w-3xl px-5 mx-auto my-10 text-center">
-        The questions are Civic 2008 question test. Website has been built by
-        &nbsp;
-        <a
-          href="https://shoaibsharif.dev"
-          className="text-yellow-700 hover:underline"
-        >
-          Shoaib Sharif
-        </a>
+        <p>
+          The questions are preparation for USCIS citizenship 100 civic test.
+          You can find these questions from{" "}
+          <a
+            href="https://www.uscis.gov/citizenship/find-study-materials-and-resources/study-for-the-test/100-civics-questions-and-answers-with-mp3-audio-english-version"
+            className="text-yellow-700 transition duration-300 hover:shadow-underline"
+          >
+            USCIS website
+          </a>
+        </p>
+        <p>
+          Website has been built by &nbsp;
+          <a
+            href="https://shoaibsharif.dev"
+            className="text-yellow-700 transition duration-300 hover:shadow-underline"
+          >
+            Shoaib Sharif
+          </a>
+        </p>
       </footer>
     </>
   );
