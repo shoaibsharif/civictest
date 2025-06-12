@@ -1,4 +1,5 @@
 @import "tailwindcss";
 body {
   @apply text-white bg-gray-900;
+  font-family: "Belleza", sans-serif;
 }
