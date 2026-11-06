@@ -8,4 +8,5 @@ Only PDF line wrapping, page furniture, and asterisk placement are normalized.
 All answer alternatives, parenthetical qualifications, territorial exceptions,
 and the tribe-list note are preserved. Asterisks become `specialConsideration`.
 The eight location/officeholder questions are flagged `variableAnswer`; the app
-links to USCIS guidance instead of inventing or freezing names.
+applies a separately sourced, dated Richardson/Texas overlay from
+`src/lib/local-answers.json`. The official bank stays unchanged.

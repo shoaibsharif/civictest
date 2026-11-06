@@ -1,10 +1,14 @@
-# Civic Study
+# Civics — Richardson, Texas
 
-A small, mobile-first civics study app by Shoaib Sharif. Built with **Vite + React + TypeScript + Tailwind CSS**, deployed to **Cloudflare Pages** with Wrangler. No framework migration or server is required.
+A personal study page for the USCIS 2025 civics test. Opens directly on a question. No login, account, backend, or analytics.
 
-## Run and verify
+- All 128 questions, a random 20, or the eight Texas/current-official questions.
+- Reveal answers and move backward or forward. Your place in the full list stays in this browser.
+- Texas and national officeholder answers are filled in. The U.S. representative is filled in from the official House lookup for ZIP 75082.
 
-Use Node 24 LTS and pnpm 10.22.0 (the version pinned in `package.json`).
+## Run
+
+Node 24 LTS and pnpm 10.22.0:
 
 ```sh
 pnpm install --frozen-lockfile
@@ -15,45 +19,38 @@ pnpm build
 pnpm preview
 ```
 
-`preview` builds the app and serves `dist` through Wrangler's local Pages runtime. `pnpm deploy` builds and deploys to the existing `civictest` Pages project; authenticate with `pnpm exec wrangler login` first. For Cloudflare's Git integration, use build command `pnpm build`, output directory `dist`, and Node 24. `wrangler.jsonc` remains the Pages configuration. No deployment is performed as part of this PR.
+Vite + React + TypeScript + Tailwind CSS. `preview` builds and serves `dist` through Wrangler's local Cloudflare Pages runtime. `pnpm deploy` builds and deploys to the existing `civictest` Pages project (authenticate with `pnpm exec wrangler login`). For Cloudflare Git integration: build `pnpm build`, output `dist`, Node 24. No deployment is performed by this change.
 
-Dependencies were updated to stable registry releases on November 5, 2026: Vite 8, React 19, Tailwind 4, TypeScript 7, ESLint 10, and Wrangler 4. Unused Headless UI, Heroicons, and Immer dependencies were removed. pnpm is the single package manager; the obsolete npm lockfile (which still described an older Next.js app) was removed.
+Stable dependencies were upgraded November 5, 2026. TypeScript 7 builds run alongside the TypeScript 6 API compatibility package required by typescript-eslint, following [Microsoft's documented setup](https://devblogs.microsoft.com/typescript/announcing-typescript-7-0/#running-side-by-side-with-typescript-6.0). pnpm is the only lockfile.
 
-TypeScript 7 does not expose the compiler API needed by the current typescript-eslint release. Following [Microsoft's supported side-by-side setup](https://devblogs.microsoft.com/typescript/announcing-typescript-7-0/#running-side-by-side-with-typescript-6.0), `@typescript/native` aliases stable TypeScript 7 for `tsc`, while `typescript` aliases the stable `@typescript/typescript6` compatibility API for ESLint. Neither is a prerelease.
+## Question and answer sources
 
-## Official question source
+The unchanged base bank is [USCIS M-1778 (09/25): 128 Civics Questions and Answers](https://www.uscis.gov/sites/default/files/document/questions-and-answers/2025-Civics-Test-128-Questions-and-Answers.pdf). Wording, acceptable alternatives, territorial exceptions, categories, and 65/20 asterisks are preserved in `src/lib/questions.json`; PDF whitespace is normalized. `sources/uscis-2025.txt` contains the full source extraction.
 
-The bank contains **128 questions** from [USCIS: 128 Civics Questions and Answers (2025 version), M-1778 (09/25)](https://www.uscis.gov/sites/default/files/document/questions-and-answers/2025-Civics-Test-128-Questions-and-Answers.pdf), retrieved November 5, 2026. No third-party question bank is used.
+[USCIS's 2025 test guidance](https://www.uscis.gov/citizenship-resource-center/naturalization-test-and-study-resources/2025-civics-test) applies this version to N-400 filings on or after October 20, 2025, including November 2025 filings. The officer asks up to 20 questions; 12 correct answers pass. Eligible 65/20 applicants use a smaller starred set described in the official PDF. This page is a study aid, not an exam simulator.
 
-The [USCIS 2025 test page](https://www.uscis.gov/citizenship-resource-center/naturalization-test-and-study-resources/2025-civics-test) confirms this test applies to N-400 applications filed on or after October 20, 2025. Earlier applicants use the 2008 test. The regular oral test asks up to 20 questions and requires 12 correct answers (stopping at 12 correct or 9 incorrect). Eligible applicants age 65+ with at least 20 years as permanent residents study the 20 starred questions and must answer 6 of 10 correctly. This app offers practice, not an official test simulation or eligibility determination.
+`src/lib/local-answers.json` overlays these answers for Richardson, verified **November 5, 2026**, without editing the official bank (question 29 checked November 6, 2026):
 
-Question and answer wording, acceptable alternatives, parenthetical qualifications, and territorial exceptions are retained. Only PDF whitespace and page furniture are removed. The asterisks are stored as `specialConsideration`; USCIS categories and subsections are preserved. The bank has 72 American Government, 46 American History, and 10 Symbols and Holidays questions.
+| Question | Answer | Official source |
+| --- | --- | --- |
+| 23 · U.S. senator | John Cornyn **or** Ted Cruz | [U.S. Senate, Texas](https://www.senate.gov/states/TX/intro.htm) |
+| 29 · U.S. representative | Julie Johnson (TX-32) | [House lookup for 75082](https://www.house.gov/htbin/findrep?ZIP=75082) |
+| 30 · Speaker | Mike Johnson | [USCIS test updates](https://www.uscis.gov/citizenship/testupdates) |
+| 38 · President | Donald Trump | [USCIS test updates](https://www.uscis.gov/citizenship/testupdates) |
+| 39 · Vice President | JD Vance | [USCIS test updates](https://www.uscis.gov/citizenship/testupdates) |
+| 57 · Chief Justice | John Roberts | [USCIS test updates](https://www.uscis.gov/citizenship/testupdates) |
+| 61 · Governor | Greg Abbott | [Office of the Texas Governor](https://gov.texas.gov/governor-abbott) |
+| 62 · State capital | Austin | [Texas Historical Commission](https://atlas.thc.texas.gov/Details?atlasnumber=5507014150&fn=print) |
 
-Questions 23, 29, 30, 38, 39, 57, 61, and 62 have location-dependent or changing answers. We retain USCIS's instructions and link directly to [USCIS answer updates](https://www.uscis.gov/citizenship/testupdates) rather than hardcoding potentially stale officeholders or assuming Texas residence. Verify the person serving at the time of the interview before self-assessing these answers.
+Question 29 uses the official House lookup result for the provided ZIP **75082**, which returns **Julie Johnson, Texas District 32**. This is a ZIP-based result, not a street-address verification. [Recheck your representative](https://www.house.gov/representatives/find-your-representative). The House cautions that 2026 election district changes and winners do not take effect until the new Congress begins in January 2027. Use the official currently serving at your interview. Recheck dated officeholder answers before the interview; there is no automatic live update.
 
-### Updating the source
+## Maintaining the bank
 
-`sources/uscis-2025.txt` preserves the full PDF text extraction. To refresh it, download the official PDF, extract each page with Python `pypdf.PdfReader(...).pages[i].extract_text()`, and join pages with newlines. Inspect the updated official document, then run:
+To refresh, download the official PDF and extract its pages with `pypdf`, joining `page.extract_text()` with newlines into the source text file. Review the document, then run:
 
 ```sh
 python3 scripts/import-questions.py
 pnpm test
 ```
 
-The import script asserts sequential IDs 1–128 and 20 starred questions. The independent Node tests compare **every question and answer** against the source snapshot and verify category boundaries and variable-answer metadata. If USCIS revises the count or structure, review the importer and tests rather than silently dropping content.
-
-## Study experience
-
-- Random 20, all 128, USCIS categories, saved hard questions, and the 65/20 starred set.
-- Speak aloud, reveal all acceptable answers, then choose “I knew it” or “Practice again.” Give the number of answers requested by the question.
-- Visible session progress and a self-assessed summary with a retry of missed questions. Random practice continues through all 20 for learning; it does not apply official test stopping rules.
-- Mark questions as hard; “Practice again” saves them automatically. Saved questions remain until unmarked, even if later answered correctly.
-- Native keyboard-operable controls, visible focus, focus moved to each new question and revealed answer, and layouts for phone and desktop.
-
-Only hard-question IDs are stored locally in this browser. No account, microphone, analytics, or server-side storage. Scores and active sessions reset on reload. Invalid saved data is ignored; blocked storage shows a message while allowing practice to continue.
-
-## Validation
-
-Automated checks: frozen-lockfile installation, production build/typecheck, lint, and the source-fidelity tests above.
-
-Browser smoke checklist: start with the keyboard; reveal and inspect focus; mark and unmark hard questions; self-assess and advance; finish a session and retry missed questions; reload to verify saved questions; check random uniqueness, category boundaries, and starred count; inspect at 320px, 390px, and desktop widths. Also serve the production build with `pnpm preview` to verify the Cloudflare Pages path.
+Tests compare every question and answer against the snapshot and verify the local overlay. CI runs tests, lint, build, and a reproducibility check. Browser checks cover reveal/navigation, the three question sets, saved position, phone reflow, and keyboard focus.
