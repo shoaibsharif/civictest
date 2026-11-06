@@ -1,0 +1,12 @@
+{
+  "verifiedOn": "2026-11-05",
+  "answers": {
+    "23": { "answers": ["John Cornyn", "Ted Cruz"], "source": "https://www.senate.gov/states/TX/intro.htm", "note": "Name either Texas senator." },
+    "30": { "answers": ["Mike Johnson"], "source": "https://www.uscis.gov/citizenship/testupdates", "note": "Speaker of the House" },
+    "38": { "answers": ["Donald Trump"], "source": "https://www.uscis.gov/citizenship/testupdates", "note": "President" },
+    "39": { "answers": ["JD Vance"], "source": "https://www.uscis.gov/citizenship/testupdates", "note": "Vice President" },
+    "57": { "answers": ["John Roberts"], "source": "https://www.uscis.gov/citizenship/testupdates", "note": "Chief Justice" },
+    "61": { "answers": ["Greg Abbott"], "source": "https://gov.texas.gov/governor-abbott", "note": "Governor of Texas" },
+    "62": { "answers": ["Austin"], "source": "https://atlas.thc.texas.gov/Details?atlasnumber=5507014150&fn=print", "note": "Texas state capital" }
+  }
+}
