@@ -28,11 +28,13 @@ test('official category boundaries, special consideration and variable answers a
   assert.equal(questions[116].note, 'For a complete list of tribes, please visit bia.gov.');
 });
 
-test('Richardson answers cover the variable questions without guessing a House district', () => {
+test('Richardson 75082 answers cover all variable questions with official sources', () => {
   const local = JSON.parse(readFileSync(new URL('../src/lib/local-answers.json', import.meta.url)));
   assert.match(local.verifiedOn, /^\d{4}-\d{2}-\d{2}$/);
-  assert.deepEqual(Object.keys(local.answers).map(Number), [23, 30, 38, 39, 57, 61, 62]);
-  assert.equal(local.answers[29], undefined);
+  assert.deepEqual(Object.keys(local.answers).map(Number), [23, 29, 30, 38, 39, 57, 61, 62]);
+  assert.deepEqual(local.answers[29].answers, ['Julie Johnson']);
+  assert.equal(new URL(local.answers[29].source).searchParams.get('ZIP'), '75082');
+  assert.equal(local.answers[29].verifiedOn, '2026-11-06');
   assert.deepEqual(local.answers[23].answers, ['John Cornyn', 'Ted Cruz']);
   assert.deepEqual(local.answers[61].answers, ['Greg Abbott']);
   assert.deepEqual(local.answers[62].answers, ['Austin']);

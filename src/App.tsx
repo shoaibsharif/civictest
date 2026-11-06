@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { sourceUrl, updatesUrl } from './lib/civic';
-import { localAnswers, makeDeck, readPosition, representativeUrl, storageKey, verifiedOn, type Mode } from './lib/study';
+import { localAnswers, makeDeck, readPosition, storageKey, verifiedOn, type Mode } from './lib/study';
 
 const modes: { id: Mode; label: string }[] = [
   { id: 'all', label: 'All questions' },
@@ -18,13 +18,11 @@ export default function App() {
   const [index, setIndex] = useState(readPosition);
   const [revealed, setRevealed] = useState(false);
   const [storageError, setStorageError] = useState(false);
-  const [representative, setRepresentative] = useState('');
   const questionHeading = useRef<HTMLHeadingElement>(null);
   const answerHeading = useRef<HTMLHeadingElement>(null);
   const hasNavigated = useRef(false);
   const question = deck[index];
   const local = localAnswers[question.id];
-  const isRepresentative = question.id === 29;
   const last = index === deck.length - 1;
 
   function chooseMode(next: Mode) {
@@ -92,15 +90,10 @@ export default function App() {
             <h2 ref={questionHeading} tabIndex={-1}>{question.question}</h2>
             <div className={`answer ${revealed ? 'is-revealed' : ''}`}>
               {!revealed ? <button className="reveal-button" onClick={() => setRevealed(true)} aria-expanded={false}>Show answer <span aria-hidden="true">↵</span></button> : <>
-                <h3 ref={answerHeading} tabIndex={-1}>{isRepresentative ? 'Your U.S. representative' : local ? 'Your answer' : question.answers.length === 1 ? 'Answer' : 'Accepted answers'}</h3>
-                {isRepresentative ? <div className="representative-answer">
-                  <p>Use the representative for your home address. Richardson alone isn’t enough to select one.</p>
-                  <a className="source-link" href={representativeUrl} target="_blank" rel="noreferrer">Find your representative on house.gov <span aria-hidden="true">↗</span><span className="sr-only"> (opens a new tab)</span></a>
-                  <label htmlFor="representative">Your answer <span>(optional note for this visit)</span></label>
-                  <input id="representative" value={representative} onChange={e => setRepresentative(e.target.value)} maxLength={100} placeholder="Representative’s name" autoComplete="off" />
-                </div> : <ul className="answer-list">{(local?.answers ?? question.answers).map((answer, i) => <li key={i}>{answer}</li>)}</ul>}
-                {local ? <p className="answer-note">{local.note} <a href={local.source} target="_blank" rel="noreferrer">Official source<span className="sr-only"> (opens a new tab)</span> ↗</a></p> : !isRepresentative && <p className="answer-note">{question.note || 'Give the number of answers the question asks for.'}</p>}
-                {local && <p className="verification-note">Checked {new Date(`${verifiedOn}T12:00:00`).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}.{question.id !== 62 && ' Confirm who is serving before your interview.'}</p>}
+                <h3 ref={answerHeading} tabIndex={-1}>{local ? 'Your answer' : question.answers.length === 1 ? 'Answer' : 'Accepted answers'}</h3>
+                <ul className="answer-list">{(local?.answers ?? question.answers).map((answer, i) => <li key={i}>{answer}</li>)}</ul>
+                {local ? <p className="answer-note">{local.note} <a href={local.source} target="_blank" rel="noreferrer">Official source<span className="sr-only"> (opens a new tab)</span> ↗</a></p> : <p className="answer-note">{question.note || 'Give the number of answers the question asks for.'}</p>}
+                {local && <p className="verification-note">Checked {new Date(`${local.verifiedOn ?? verifiedOn}T12:00:00`).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}.{question.id !== 62 && ' Confirm who is serving before your interview.'}</p>}
               </>}
             </div>
           </div>

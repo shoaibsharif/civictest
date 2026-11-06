@@ -56,12 +56,6 @@ h3 { margin: 0 0 14px; font-size: 11px; font-weight: 600; text-transform: upperc
 .answer-note { font-size: 12px; line-height: 1.6; margin: 20px 0 0; color: var(--muted); }
 .answer-note a { display: inline-block; margin-left: 8px; text-decoration: underline; }
 .verification-note { font-size: 11px; color: var(--muted); margin: 8px 0 0; }
-.representative-answer { font-size: 14px; max-width: 520px; }
-.representative-answer p { margin: 0 0 12px; }
-.source-link { color: var(--blue); text-decoration: underline; }
-.representative-answer label { display: block; font-size: 12px; margin: 20px 0 8px; }
-.representative-answer label span { color: var(--muted); }
-.representative-answer input { width: 100%; min-height: 44px; border: 1px solid #b8bdc9; border-radius: 4px; padding: 8px 12px; }
 .sheet-footer { border-top: 1px solid #ebeced; display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 16px 26px; }
 .sheet-footer button { display: inline-flex; align-items: center; justify-content: center; gap: 12px; font-size: 13px; font-weight: 550; padding: 10px 14px; border-radius: 5px; }
 .previous:hover:not(:disabled) { background: #f4f4f2; }

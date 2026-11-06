@@ -2,9 +2,8 @@ import { quiz } from './civic';
 import local from './local-answers.json';
 
 export type Mode = 'all' | 'random' | 'texas';
-export const localAnswers: Record<number, { answers: string[]; source: string; note: string }> = local.answers;
+export const localAnswers: Record<number, { answers: string[]; source: string; note: string; verifiedOn?: string }> = local.answers;
 export const verifiedOn = local.verifiedOn;
-export const representativeUrl = 'https://www.house.gov/representatives/find-your-representative';
 export const storageKey = 'civictest:richardson:v1';
 
 export function makeDeck(mode: Mode) {

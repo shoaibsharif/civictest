@@ -2,6 +2,7 @@
   "verifiedOn": "2026-11-05",
   "answers": {
     "23": { "answers": ["John Cornyn", "Ted Cruz"], "source": "https://www.senate.gov/states/TX/intro.htm", "note": "Name either Texas senator." },
+    "29": { "answers": ["Julie Johnson"], "source": "https://www.house.gov/htbin/findrep?ZIP=75082", "note": "Texas District 32 · House lookup for ZIP 75082", "verifiedOn": "2026-11-06" },
     "30": { "answers": ["Mike Johnson"], "source": "https://www.uscis.gov/citizenship/testupdates", "note": "Speaker of the House" },
     "38": { "answers": ["Donald Trump"], "source": "https://www.uscis.gov/citizenship/testupdates", "note": "President" },
     "39": { "answers": ["JD Vance"], "source": "https://www.uscis.gov/citizenship/testupdates", "note": "Vice President" },
